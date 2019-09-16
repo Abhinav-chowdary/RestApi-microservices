@@ -4,7 +4,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import javax.persistence.Id;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -64,7 +63,7 @@ public class AppointmentManager {
 		int bookingID = bookings.RegisterBooking(data.getUserId(),data.getUserName(),data.getDate());
 				
 //		AppointymentBooking aB= new AppointymentBooking();
-//		String message =  aB.Booking(date, bookingID);
+//		String message =  aB.Booking(data.getUserId(),data.getUserName(),data.getDate(),bookingID,);
 		return bookingID;
 	}
 
