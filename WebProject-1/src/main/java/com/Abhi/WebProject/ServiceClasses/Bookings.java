@@ -2,12 +2,9 @@ package com.Abhi.WebProject.ServiceClasses;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import com.Abhi.WebProject.Entities.BookingDetails;
 import com.Abhi.WebProject.Interfaces.BookingsRepo;
 
@@ -17,8 +14,9 @@ public class Bookings {
 	@Autowired
 	BookingsRepo bookingsRepo;
 	
-	int bookingID;
-
+	int bookid;
+	
+	Optional<BookingDetails> bookingID;
 	
 	SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -26,18 +24,21 @@ public class Bookings {
 		
 		System.out.println("im here");
 		try {
-		bookingID = bookingsRepo.findByBookingMax();
-		bookingID += bookingID ;
+		System.out.println(bookingsRepo.findTopByBookingID().toString());
+		
+		bookid = bookingsRepo.findTopByBookingID().get(0).get("_id");
+		++bookid;
+		
 		}finally {
-			if(bookingID <= 0) {
-				bookingID = 1;
+			if(bookid <= 0) {
+				bookid=1;
 			}
 		}
 		
-		BookingDetails bookingDetails = new BookingDetails(userId, userName, sd.parse(date) , "confirmed", bookingID);
+		BookingDetails bookingDetails = new BookingDetails(userId, userName, sd.parse(date) , "confirmed", bookid);
 		bookingsRepo.save(bookingDetails);
 		
-		return bookingID;
+		return bookid;
 	}
 
 	

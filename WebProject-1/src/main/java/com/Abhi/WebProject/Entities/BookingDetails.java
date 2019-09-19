@@ -2,13 +2,10 @@ package com.Abhi.WebProject.Entities;
 
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-
+import org.springframework.data.annotation.Id;
 import org.springframework.stereotype.Component;
 
-@Component
-@Entity
+
 public class BookingDetails {
 	
 	
