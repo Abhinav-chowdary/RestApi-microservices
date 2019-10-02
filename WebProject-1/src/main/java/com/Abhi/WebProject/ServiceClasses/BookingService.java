@@ -9,7 +9,7 @@ import com.Abhi.WebProject.Entities.BookingDetails;
 import com.Abhi.WebProject.Interfaces.BookingsRepo;
 
 @Component
-public class Bookings {
+public class BookingService {
 	
 	@Autowired
 	BookingsRepo bookingsRepo;
