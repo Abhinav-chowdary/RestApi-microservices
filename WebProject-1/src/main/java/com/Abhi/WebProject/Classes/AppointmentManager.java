@@ -21,12 +21,12 @@ public class AppointmentManager {
 	Date date;
 	Date currentDate;
 	boolean success = false;
+	BookingService bookingService;
 	
 	
 	@Autowired
 	RestTemplate restTemplate;
-	@Autowired
-	BookingService bookingService;
+	
 	
 	SimpleDateFormat sd = new SimpleDateFormat("yyyy.MM.dd");
 	

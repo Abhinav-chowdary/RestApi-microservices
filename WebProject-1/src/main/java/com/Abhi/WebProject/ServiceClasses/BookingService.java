@@ -11,45 +11,44 @@ import com.Abhi.WebProject.Interfaces.BookingsRepo;
 @Component
 public class BookingService {
 	
+	int bookingId=0;
+	boolean success= false;
+	
 	@Autowired
 	BookingsRepo bookingsRepo;
-	
-	int bookid;
-	
-	Optional<BookingDetails> bookingID;
-	
 	SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
 
 	public int RegisterBooking(int userId,String userName, String date) throws ParseException {
 		
-		System.out.println("im here");
 		try {
-		System.out.println(bookingsRepo.findTopByBookingID().toString());
-		
-		bookid = bookingsRepo.findTopByBookingID().get(0).get("_id");
-		++bookid;
-		
+			bookingId = bookingsRepo.findTopByBookingID().get(0).get("_id");
+			++bookingId;
+		}catch(Exception e){
+			System.out.println(e);
 		}finally {
-			if(bookid <= 0) {
-				bookid=1;
+			if(bookingId <= 0) {
+				bookingId=1;
 			}
 		}
 		
-		BookingDetails bookingDetails = new BookingDetails(userId, userName, sd.parse(date) , "confirmed", bookid);
-		bookingsRepo.save(bookingDetails);
+		BookingDetails bookingDetails = new BookingDetails(userId, userName, sd.parse(date) , "confirmed", bookingId);
 		
-		return bookid;
+		try {
+			bookingsRepo.save(bookingDetails);
+			success = true;
+		}catch(Exception e) {
+			System.out.println(e);
+		}finally{
+			bookingId = (!success)? 0 : bookingId ;
+		}	
+		return bookingId;
 	}
 
-	
-	public Optional<BookingDetails> Appointments(int bookingID) {
-		
+	public Optional<BookingDetails> Appointments(int bookingID) {	
 		return bookingsRepo.findById(bookingID);
 	}
 	
 	public void DelBooking(int bookingID) {
-		
 		bookingsRepo.deleteById(bookingID);
-	
 	}
 }
