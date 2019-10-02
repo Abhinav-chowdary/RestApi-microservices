@@ -6,17 +6,28 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 @RestController
-public class AppointymentBooking {
+public class AppointmentBooking {
+	boolean success = false;
+	String response;
+	String postCallResponse;
 	
 	@Autowired
 	RestTemplate restTemp;
 	
+	/*Sending booking details to staff API to make the booking finalised*/
 	public String Booking(long iD, String name, String date, int bookingID){
 		
 		Booking booking =  new Booking(iD, name, date, Integer.toString(bookingID));
+		try {
+			postCallResponse = restTemp.postForObject("URL",booking, String.class);
+			success = true;
+		}catch(Exception e) {
+			System.out.println(e);
+		}finally {
+			response = (!success)? "Booking Failed" : "Booking Successfull";
+		}
 		
-	restTemp.postForObject("URL",booking, String.class);
 		
-		return "Booking Successfull";
+		return response;
 	}
 }

@@ -18,7 +18,6 @@ public class BookingDetails {
 	
 	public BookingDetails(){}
 	
-		
 	public BookingDetails(int userId, String userName, Date date, String bookingStatus, int bookingID) {
 		super();
 		this.userId = userId;
@@ -26,6 +25,14 @@ public class BookingDetails {
 		this.date = date;
 		this.bookingStatus = bookingStatus;
 		this.bookingID= bookingID;
+	}
+	
+		public BookingDetails DefaultBookingDetails(){
+		
+			BookingDetails bookingDetails = new BookingDetails(0,"Default",new Date(),"UnKonwn",0);
+		
+		return bookingDetails;
+		
 	}
 
 
