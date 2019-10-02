@@ -1,8 +1,12 @@
 package com.Abhi.WebProject.Entities;
 
 import java.util.Date;
-import org.springframework.data.annotation.Id;
+import java.util.Optional;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.stereotype.Component;
+
+@Component
 public class BookingDetails {
 		
 	private int 	userId;

@@ -1,4 +1,5 @@
 package com.Abhi.WebProject.Interfaces;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.data.mongodb.config.EnableMongoAuditing;
@@ -13,6 +14,5 @@ public interface BookingsRepo extends MongoRepository<BookingDetails, Integer> {
 	
 	@Query(fields = "{_id : 1}", value = "{}",sort = "{_id :-1}")
 	List<Map<String, Integer>> findTopByBookingID();
-	
 
 }

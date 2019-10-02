@@ -10,7 +10,7 @@ public class Booking {
 		private String bookedDate;
 		private String bookingID;
 
-		public Booking() {}
+		public Booking(){}
 		
 		public long getId() {
 			return id;

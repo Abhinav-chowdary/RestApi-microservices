@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import com.Abhi.WebProject.Entities.BookingDetails;
-import com.Abhi.WebProject.ServiceClasses.BookingService;;
+import com.Abhi.WebProject.ServiceClasses.BookingService;
+import com.opengamma.strata.collect.Unchecked;;
 
 
 @RestController
@@ -31,24 +32,17 @@ public class ManageBooking {
 	
 	/*This Method takes Booking ID as input and search for Booking details in database.
 	 If Booking details are unavailable , Default vales will be returned*/
-	
 	@CrossOrigin(origins="*")
 	@GetMapping("/Booking/{bookingID}")
 	public BookingDetails BookingManager(@PathVariable("bookingID") int bookingID){
 		
-		try {
-			Optional<BookingDetails> bookingData = bookingService.Appointments(bookingID);
-			userSearchResponse = (!bookingData.isPresent()) ? false: true;
-			
-		}catch(Exception e) {
-			System.out.println();
-		}finally {			
-			if(!userSearchResponse) {
-				bookingData = bookingDetails.DefaultBookingDetails();
-			}			
-		}
-		
-		return bookingData;
+		return Unchecked.wrap(() -> {
+			BookingDetails myBookingData;
+			Optional<BookingDetails> bookingData = Optional.empty();
+			bookingData = bookingService.Appointments(bookingID);			
+			myBookingData = bookingData.orElseGet(bookingDetails::DefaultBookingDetails);	
+			return myBookingData;
+		});	
 	}
 	
 	
