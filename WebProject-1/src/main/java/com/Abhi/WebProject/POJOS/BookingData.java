@@ -9,6 +9,8 @@ public class BookingData {
 	private String 	userName;
 	private	String	date;
 	
+	public BookingData() {}
+	
 	public int getUserId() {
 		return userId;
 	}
@@ -26,7 +28,5 @@ public class BookingData {
 	}
 	public void setDate(String date) {
 		this.date = date;
-	}
-	
-	
+	}	
 }

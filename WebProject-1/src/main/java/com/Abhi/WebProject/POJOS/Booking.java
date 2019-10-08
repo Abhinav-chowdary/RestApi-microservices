@@ -10,8 +10,8 @@ public class Booking {
 		private String bookedDate;
 		private String bookingID;
 
-
-
+		public Booking(){}
+		
 		public long getId() {
 			return id;
 		}
@@ -57,6 +57,4 @@ public class Booking {
 			return "Booking [id=" + id + ", userID=" + userID + ", bookedDate=" + bookedDate + ", bookingID=" + bookingID
 					+ "]";
 		}
-
-		public Booking() {}
 	}

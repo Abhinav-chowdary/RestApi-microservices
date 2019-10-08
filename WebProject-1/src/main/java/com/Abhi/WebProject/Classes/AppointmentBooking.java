@@ -14,8 +14,10 @@ public class AppointmentBooking {
 	@Autowired
 	RestTemplate restTemp;
 	
+	public AppointmentBooking() {}
+	
 	/*Sending booking details to staff API to make the booking finalised*/
-	public String Booking(long iD, String name, String date, int bookingID){
+	public String BookingNewAppointment(long iD, String name, String date, int bookingID){
 		
 		Booking booking =  new Booking(iD, name, date, Integer.toString(bookingID));
 		try {
@@ -26,8 +28,6 @@ public class AppointmentBooking {
 		}finally {
 			response = (!success)? "Booking Failed" : "Booking Successfull";
 		}
-		
-		
 		return response;
 	}
 }
